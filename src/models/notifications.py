@@ -1,7 +1,6 @@
 import uuid
 from datetime import datetime
 from sqlalchemy import  Enum, DateTime
-from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import Mapped, mapped_column
 from src.models.enums import NotificationType, NotificationStatus
 from src.database.base import Base

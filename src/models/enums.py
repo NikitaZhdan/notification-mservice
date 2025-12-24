@@ -2,7 +2,7 @@ import enum
 
 
 class NotificationType(str, enum.Enum):
-    EMAIl = "EMAIL"
+    EMAIL = "EMAIL"
 
 
 class NotificationStatus(str, enum.Enum):

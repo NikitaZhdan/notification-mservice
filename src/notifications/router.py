@@ -5,18 +5,16 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.database.session import get_session
 from src.notifications.schemas import NotificationResponse, NotificationBase
 from src.notifications.services import NotificationService
-
+from src.dependencies import get_notification_service
 
 router = APIRouter()
 
 
-@router.post("/notifications")
+@router.post("/notifications", response_model=NotificationResponse)
 async def create_new_notification(
         notification_data: NotificationBase,
-        session: AsyncSession = Depends(get_session)
-) -> NotificationResponse:
-
-    service = NotificationService(session)
+        service: NotificationService = Depends(get_notification_service)
+):
     result = await service.create_notification(notification_data)
 
     return result

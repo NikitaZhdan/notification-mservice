@@ -1,7 +1,5 @@
 from fastapi import status, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
-
-from src.models import Notification
 from src.notifications.repositories import NotificationRepository
 from src.notifications.schemas import NotificationBase, NotificationResponse
 
@@ -12,7 +10,7 @@ class NotificationService:
 
 
     async def create_notification(self, notification_data: NotificationBase) -> NotificationResponse:
-        if self.notification_repo.get_by_idempotency_key(notification_data.idempotency_key):
+        if await self.notification_repo.get_by_idempotency_key(notification_data.idempotency_key):
             raise HTTPException(status_code=status.HTTP_409_CONFLICT)
 
         await self.notification_repo.create(notification_data)

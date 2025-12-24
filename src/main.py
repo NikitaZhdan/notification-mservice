@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from src.dependencies import main_router
+from src.base_router import main_router
 
 
 @asynccontextmanager

@@ -1,8 +1,10 @@
-from src.notifications.router import router as notifications_router
+from fastapi import Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from src.database.session import get_session
+from src.notifications.services import NotificationService
 
-from fastapi import APIRouter
 
-
-main_router = APIRouter()
-
-main_router.include_router(notifications_router)
+async def get_notification_service(
+    session: AsyncSession = Depends(get_session)
+) -> NotificationService:
+    return NotificationService(session)

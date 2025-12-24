@@ -4,7 +4,7 @@ from src.models.enums import NotificationStatus, NotificationType
 
 
 class NotificationBase(BaseModel):
-    type: NotificationType = NotificationType.EMAIl
+    type: NotificationType = NotificationType.EMAIL
     recipient: str
     payload: str
     idempotency_key: UUID

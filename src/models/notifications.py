@@ -12,7 +12,7 @@ class Notification(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
-    idempotency_key: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), unique=True, nullable=False, default=uuid.uuid4)
+    idempotency_key: Mapped[uuid.UUID] = mapped_column(unique=True)
     type: Mapped[NotificationType] = mapped_column(Enum(NotificationType), nullable=False)
 
     recipient: Mapped[str] = mapped_column(nullable=False)

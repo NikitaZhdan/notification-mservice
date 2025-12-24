@@ -1,3 +1,4 @@
+from fastapi import status, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.models import Notification
@@ -11,8 +12,8 @@ class NotificationService:
 
 
     async def create_notification(self, notification_data: NotificationBase) -> NotificationResponse:
-        if self.notification_repo.get_by_idempotency_key(notification_data.idempotency_key) is None:
-            raise Exception("409 Invalid idempotency key")
+        if self.notification_repo.get_by_idempotency_key(notification_data.idempotency_key):
+            raise HTTPException(status_code=status.HTTP_409_CONFLICT)
 
         await self.notification_repo.create(notification_data)
 

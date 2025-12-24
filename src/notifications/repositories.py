@@ -2,6 +2,7 @@ from sqlalchemy import Select
 from sqlalchemy.ext.asyncio import AsyncSession
 from src.models import Notification
 from src.notifications.schemas import NotificationBase
+from uuid import UUID
 
 
 class NotificationRepository:
@@ -21,7 +22,7 @@ class NotificationRepository:
 
         return stmt
 
-    async def get_by_idempotency_key(self, idempotency_key: str) -> Notification | None:
+    async def get_by_idempotency_key(self, idempotency_key: UUID) -> Notification | None:
         stmt = Select(Notification).where(Notification.idempotency_key == idempotency_key)
         result = await self.session.execute(stmt)
 

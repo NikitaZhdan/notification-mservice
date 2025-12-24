@@ -1,12 +1,13 @@
 from pydantic import BaseModel
-from src.models.enums import NotificationStatus
+from uuid import UUID
+from src.models.enums import NotificationStatus, NotificationType
 
 
 class NotificationBase(BaseModel):
-    type: str
+    type: NotificationType = NotificationType.EMAIl
     recipient: str
     payload: str
-    idempotency_key: str
+    idempotency_key: UUID
 
 
 class NotificationResponse(BaseModel):

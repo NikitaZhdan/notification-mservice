@@ -16,7 +16,6 @@ class NotificationRepository:
             payload=notification_data.payload,
             idempotency_key=notification_data.idempotency_key,
         )
-
         self.session.add(stmt)
         await self.session.commit()
 
